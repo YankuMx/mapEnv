@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <TileMap version="1.0.0" tilemapservice="http://tms.osgeo.org/1.0.0">
+      <Title>rf_abasal.tif</Title>
+      <Abstract></Abstract>
+      <SRS>PROJCS["unnamed",GEOGCS["WGS 84",DATUM["WGS_1984",SPHEROID["WGS 84",6378137,298.257223563,AUTHORITY["EPSG","7030"]],AUTHORITY["EPSG","6326"]],PRIMEM["Greenwich",0],UNIT["degree",0.0174532925199433],AUTHORITY["EPSG","4326"]],PROJECTION["Lambert_Conformal_Conic_2SP"],PARAMETER["standard_parallel_1",17.5],PARAMETER["standard_parallel_2",29.5],PARAMETER["latitude_of_origin",12],PARAMETER["central_meridian",-102],PARAMETER["false_easting",2500000],PARAMETER["false_northing",0],UNIT["metre",1,AUTHORITY["EPSG","9001"]]]</SRS>
+      <BoundingBox minx="1072000.00000000000000" miny="320000.00000000000000" maxx="4083000.00000000000000" maxy="2349000.00000000000000"/>
+      <Origin x="1072000.00000000000000" y="320000.00000000000000"/>
+      <TileFormat width="256" height="256" mime-type="image/png" extension="png"/>
+      <TileSets profile="raster">
+        <TileSet href="0" units-per-pixel="16000.00000000000000" order="0"/>
+        <TileSet href="1" units-per-pixel="8000.00000000000000" order="1"/>
+        <TileSet href="2" units-per-pixel="4000.00000000000000" order="2"/>
+        <TileSet href="3" units-per-pixel="2000.00000000000000" order="3"/>
+        <TileSet href="4" units-per-pixel="1000.00000000000000" order="4"/>
+        <TileSet href="5" units-per-pixel="500.00000000000000" order="5"/>
+      </TileSets>
+    </TileMap>
+    
