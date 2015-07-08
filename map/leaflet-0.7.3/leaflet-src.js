@@ -2505,6 +2505,7 @@ L.TileLayer = L.Class.extend({
 		}
 
 		this._reset();
+		pubThis = this;
 		this._update();
 	},
 
@@ -2855,7 +2856,6 @@ L.TileLayer = L.Class.extend({
 		/* Antonacion: Hasta aqui el tile esta vacio. Solamente se crean con ancho, alto y posición*/
 		
 		this._tiles[tilePoint.x + ':' + tilePoint.y] = tile;
-		console.log(tile);
 		this._loadTile(tile, tilePoint);
 
 		if (tile.parentNode !== this._tileContainer) {
@@ -2952,17 +2952,12 @@ L.TileLayer = L.Class.extend({
 		return tile;
 	},
 	
-	overlayColor: function (fullimg) {	
+	overlayColor: function (fullimg,color) {	
 	//fullimg="http://yankuserver.com/map/tiles/1/0/0.png";
 		var canvas = document.createElement("canvas");
 		var ctx = canvas.getContext("2d");
 		var originalPixels = null;
 		var currentPixels = null;
-		var letters = '0123456789ABCDEF'.split('');
-		var color = '#';
-		for (var i = 0; i < 6; i++ ) {
-			color += letters[Math.floor(Math.random() * 16)];
-		}
 
 	  selectImg = new Image(256,256);
 	  selectImg.src = fullimg;	
@@ -3005,14 +3000,26 @@ L.TileLayer = L.Class.extend({
 
 		this._adjustTilePoint(tilePoint);
 		tile.src = this.getTileUrl(tilePoint);
-		
-		/*var estaImg = new Image(256,256);
-	  estaImg.src = tile.src;	
-
-	  document.getElementById("cuerpo").appendChild(estaImg);*/
 	  
-	  
-		tile.src = this.overlayColor(tile.src);
+	  	/*var letters = '0123456789ABCDEF'.split('');
+		var color = '#';
+		for (var i = 0; i < 6; i++ ) {
+			color += letters[Math.floor(Math.random() * 16)];
+		}*/
+		$('#puntos').append('Punto: '+tilePoint.x+','+tilePoint.y+','+tilePoint.z+' Variables: '+L.variable+' Valores: '+L.valor+'\n');
+		var valor = L.valor;
+		var v = valor.split(",");
+		var suma = 0;
+		for(var i=0; i<v.length; i++){
+			suma = +suma + +v[i];
+		}
+		suma = suma/24;
+		suma = Math.round(suma);
+		suma = +suma + +tilePoint.x + +tilePoint.y;
+		if(suma>31)
+			suma=31;
+		var color = L.colores[suma];
+		tile.src = this.overlayColor(tile.src,color);
 		
 		this.fire('tileloadstart', {
 			tile: tile,
@@ -3022,7 +3029,7 @@ L.TileLayer = L.Class.extend({
 
 	_tileLoaded: function () {
 		this._tilesToLoad--;
-		//console.log(this);
+
 		if (this._animated) {
 			L.DomUtil.addClass(this._tileContainer, 'leaflet-zoom-animated');
 		}

@@ -6,6 +6,29 @@
 /* globals L */
 
 function init() {
+	$("#r1, #r2, #r3, #r4, #r5").ionRangeSlider({
+	min: 0,
+	max: 100,
+	from: 50,
+	grid:true,
+	
+	});
+	
+	$(".var").change(function(){
+		L.variable = "";
+		L.valor = "";
+		$(".var").each(function() {
+            var variable = this.id;
+			var valor = this.value;
+			L.variable = L.variable+variable+",";
+			L.valor = L.valor+valor+",";
+        });
+		pubThis.redraw();
+    });
+	function componentToHex(c) {
+		var hex = c.toString(16);
+		return hex.length == 1 ? "0" + hex : hex;
+	}
 	
 	var minZoom = 1,
 		maxZoom = 5,
@@ -24,7 +47,30 @@ function init() {
 	var rc = new L.RasterCoords(map, img);
 	// set the bounds on map
 	rc.setMaxBounds();
+	L.valor = "50,50,50,50,50,";
+	L.variable = "r1,r2,r3,r4,r5,";
 	
+	var red = 255; 
+	var green = 0;
+	var blue = 0;
+	var stepSize = 16;
+	var colores = [];
+	var iColores = 0;
+	while(green < 255)
+	{
+		green += stepSize;
+		if(green > 255) { green = 255; }
+		colores[iColores] = "#" + componentToHex(red) + componentToHex(green) + componentToHex(blue);
+		iColores++;
+	}
+	while(red > 0)
+	{
+		red -= stepSize;
+		if(red < 0) { red = 0; }
+		colores[iColores] = "#" + componentToHex(red) + componentToHex(green) + componentToHex(blue);
+		iColores++;
+	}
+	L.colores = colores;	
 	
 	/*map.on('dragend', function(event){
 		alert("mousemove");
